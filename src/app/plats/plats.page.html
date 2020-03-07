@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Nos plats
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-list>
+      <ion-item *ngFor=" let plat of plats" >
+      <ion-label> {{plat.Name}} <p>{{plat.Description}}</p></ion-label>
+        {{plat.prix}}
+        <ion-icon name="create"  color="warning" (click)="update(plat.id)"></ion-icon>
+        <ion-icon name="trash" color="danger" (click)="deletePlat(plat.id)"></ion-icon>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <ion-fab vertical="bottom" horiontal="end" slot="fixed">
+    <ion-fab-button routerLink="/tabs/plats/add" >
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button> 
+  </ion-fab>
+</ion-content>

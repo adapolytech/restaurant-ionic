@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
+import { ControlplatGuard } from '../plats/controlplat.guard';
+import { LoginPageModule } from '../form/login/login.module';
 
 const routes: Routes = [
   {
@@ -8,45 +10,70 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
+        path: 'menu',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+              import('../menu/menu.module').then(m => m.MenuModule)
+          },
+          {
+            path:'restaurant/:id',
+            loadChildren: ()=>
+              import('../menu/details/details.module').then(m=>m.DetailsPageModule)
           }
         ]
       },
       {
-        path: 'tab2',
+        path:'login',
+        loadChildren:()=>
+          import('../form/login/login.module').then(m=>m.LoginPageModule)
+      },
+      {
+        path:'register',
+        loadChildren:()=>
+          import('../form/register/register.module').then(m=>m.RegisterPageModule)
+      },
+      {
+        path: 'plats',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+              import('../plats/plats.module').then(m => m.PlatsModule)
+          },
+          {
+            path: 'add',
+            canActivate:[ControlplatGuard],
+            loadChildren: () =>
+              import('../plats/addplat/addplat.module').then(m => m.AddplatPageModule)
+          },
+          {
+            path: 'modifier/:id',
+            loadChildren: () => import('../plats/modifier/modifier.module').then( m => m.ModifierPageModule)
           }
         ]
       },
       {
-        path: 'tab3',
+        path: 'compte',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+              import('../compte/compte.module').then(m => m.CompteModule)
           }
         ]
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/menu',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/tabs/menu',
     pathMatch: 'full'
   }
 ];
