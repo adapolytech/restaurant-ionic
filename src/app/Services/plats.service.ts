@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Plat} from '../Models/plat';
 import {HttpClient} from '@angular/common/http';
+import { identifierModuleUrl } from '@angular/compiler';
 
 
 @Injectable({
@@ -26,8 +27,8 @@ export class PlatsService {
   updatePlat(id:number,p:any){
     return this.backend.put(this.url+'plats/'+id,p,{params:{'token':localStorage.getItem('token')}});
   }
-  deletePlat(p:Plat){
-    return this.backend.delete('url');
+  deletePlat(p:number){
+    return this.backend.delete(this.url+'plats/'+p,{params:{'token':localStorage.getItem('token')}});
   }
   getRestaurant(id:number){
     return this.backend.get(this.url+"restaurants/"+id);

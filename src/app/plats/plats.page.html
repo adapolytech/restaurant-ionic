@@ -7,9 +7,10 @@
 </ion-header>
 
 <ion-content>
-  <div>
+  <div *ngFor="let r of restaurants">
+    <ion-text color="danger"><h4 style="margin-left: 10px;">Restaurant {{r.Name}}</h4></ion-text>
     <ion-list>
-      <ion-item *ngFor=" let plat of plats" >
+      <ion-item *ngFor=" let plat of r.plats" >
       <ion-label> {{plat.Name}} <p>{{plat.Description}}</p></ion-label>
         {{plat.prix}}
         <ion-icon name="create"  color="warning" (click)="update(plat.id)"></ion-icon>

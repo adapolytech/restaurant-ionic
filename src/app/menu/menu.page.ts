@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class Menu implements OnInit {
   lat: number = 14.716677;
-  lng: number = -17.467686;
+  lng: number = -17.450686;
   height = 0;
   zoom: number = 15;
   restaurants:[];
